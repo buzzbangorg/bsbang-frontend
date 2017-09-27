@@ -1,6 +1,13 @@
 <html>
   <body>
     <p>bsBang search</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+           <div class="message_flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <form action="" method="post" name="search">
       {{ form.csrf_token }}
       <p>
