@@ -1,19 +1,16 @@
 <html>
-  <body>
-    <p>bsBang search</p>
-    <form action="" method="post" name="search">
-      {{ form.csrf_token }}
-      <p>
-        {{ form.q(size=80) }}<br>
-      </p>
-      <p><input type="submit" value="Search"></p>
-    </form>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-           <div class="message_flash">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    <body>
+        <p>bsBang search</p>
+        <form action="" method="post" name="search">
+            {{ form.csrf_token }}
+            <p>
+                {{ form.q(size=80) }}<br>
+            </p>
+            <p><input type="submit" value="Search"></p>
+        </form>
+        {% if results %}
+            <p>{{ results['response']['numFound'] }} result(s)</p>
+            {{ results }}
+        {% endif %}
   </body>
 </html>

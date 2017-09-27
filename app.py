@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
+import json
 import requests
 
 app = Flask(__name__)
@@ -16,9 +17,11 @@ def index():
         # flash('Query for [%s]' % form.q.data)
         params = {'q': form.q.data, 'defType': 'edismax'}
         r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
-        flash('Results [%s]' % r.text)
+        results = json.loads(r.text)
+    else:
+        results = None
 
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, results=results)
 
 
 class SearchForm(FlaskForm):
