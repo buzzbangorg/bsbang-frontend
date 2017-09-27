@@ -17,7 +17,6 @@ def index():
         params = {'q': form.q.data, 'defType': 'edismax'}
         r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
         flash('Results [%s]' % r.text)
-        return redirect('/')
 
     return render_template('index.html', form=form)
 
