@@ -2,6 +2,7 @@
   <body>
     <p>bsBang search</p>
     <form action="" method="post" name="search">
+      {{ form.csrf_token }}
       <p>
         {{ form.q(size=80) }}<br>
       </p>
