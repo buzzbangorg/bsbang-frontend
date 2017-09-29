@@ -13,7 +13,7 @@
             {% for doc in results['response']['docs'] %}
                 <p>
                     <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
-                    Type: {{ doc.additionalType }}<br/>
+                    Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/>
                     {{ doc.url }}
                 </p>
             {% endfor %}
