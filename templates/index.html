@@ -10,7 +10,13 @@
         </form>
         {% if results %}
             <p>{{ results['response']['numFound'] }} result(s)</p>
-            {{ results }}
+            {% for doc in results['response']['docs'] %}
+                <p>
+                    <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
+                    Type: {{ doc.additionalType }}<br/>
+                    {{ doc.url }}
+                </p>
+            {% endfor %}
         {% endif %}
   </body>
 </html>
