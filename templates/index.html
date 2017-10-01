@@ -1,11 +1,13 @@
 <html>
     <title>bsBang</title>
     <body>
-        <p>bsBang search</p>
+        <h1>bsBang Search</h1>
+        <p><a href="about">About</a></p>
         <form action="" method="post" name="search">
             {{ form.csrf_token }}
             <p>
-                {{ form.q(size=80) }}<br>
+                Enter search term (e.g. 'rrsH', 'lacZ'):<br/>
+                {{ form.q(size=80) }}<br/>
             </p>
             <p><input type="submit" value="Search"></p>
         </form>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect
+from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
@@ -22,6 +22,11 @@ def index():
         results = None
 
     return render_template('index.html', form=form, results=results)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 class SearchForm(FlaskForm):
