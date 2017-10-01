@@ -18,4 +18,5 @@ To install in Apache2
 
 ## Contact ##
 Brought to you by the Micklem Lab at Cambridge University in the UK (http://www.micklemlab.org/)
-Comments/suggestions please send to justincc AT intermine.org or tweet me on Twitter (@justincc)
+
+Comments/suggestions please send to justincc AT intermine.org or tweet me (@justincc).
