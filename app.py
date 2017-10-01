@@ -6,7 +6,7 @@ import json
 import requests
 
 app = Flask(__name__)
-app.config.from_pyfile('config.cfg')
+app.config.from_pyfile('bsbang.cfg')
 app.config['SOLR_SELECT_URL'] = app.config['SOLR_URL'] + '/select'
 
 
