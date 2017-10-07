@@ -2,7 +2,7 @@
 
 ## About ##
 
-This is the frontend to the extremely alpha BsBang project indexing Bioschemas (http://bioschemas.org) indexing project.
+This is the frontend to the extremely alpha Buzzbang project indexing Bioschemas (http://bioschemas.org) indexing project.
 
 The main site running this frontend is at http://bsbang.science
 
