@@ -1,26 +1,51 @@
 <html>
+<head>
     <title>Buzzbang</title>
-    <body>
-        <h1>Buzzbang Search</h1>
-        <p><a href="about">About</a></p>
-        <form action="" method="post" name="search">
-            {{ form.csrf_token }}
+    <style>
+        .results-table { border:'0' }
+        .results-table td {
+            padding-right: 7.5px;
+            vertical-align:top
+        }
+    </style>
+</head>
+<body>
+    <h1>Buzzbang Search</h1>
+    <p><a href="about">About</a></p>
+    <form action="" method="post" name="search">
+        {{ form.csrf_token }}
+        <p>
+            Enter search term (e.g. 'registry', 'rrsH', 'lacZ lacY lacA'):<br/>
+            {{ form.q(size=80) }}<br/>
+        </p>
+        <p><input type="submit" value="Search"></p>
+    </form>
+    {% if results %}
+        <p>{{ results['response']['numFound'] }} result(s)</p>
+        {% for doc in results['response']['docs'] %}
             <p>
-                Enter search term (e.g. 'identifiers', 'rrsH', 'lacZ lacY lacA'):<br/>
-                {{ form.q(size=80) }}<br/>
+                <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
+                <table class='results-table'>
+                    <tr>
+                        <td><b>Type</b></td>
+                        <td>{{ doc.AT_type }}</td>
+                    </tr>
+
+                <!-- Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/> -->
+                <!-- {{ doc.url }} -->
+                    {% if doc.AT_type == 'DataCatalog' %}
+                        <tr>
+                            <td><b>Keywords</b></td>
+                            <td>{{ doc.keywords }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Description</b></td>
+                            <td>{{ doc.description }}</td>
+                        </tr>
+                    {% endif %}
+                </table>
             </p>
-            <p><input type="submit" value="Search"></p>
-        </form>
-        {% if results %}
-            <p>{{ results['response']['numFound'] }} result(s)</p>
-            {% for doc in results['response']['docs'] %}
-                <p>
-                    <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
-                    Type: {{ doc.AT_type }}<br/>
-                    <!-- Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/> -->
-                    <!-- {{ doc.url }} -->
-                </p>
-            {% endfor %}
-        {% endif %}
-  </body>
+        {% endfor %}
+    {% endif %}
+</body>
 </html>
