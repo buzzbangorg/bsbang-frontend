@@ -6,7 +6,7 @@
         <form action="" method="post" name="search">
             {{ form.csrf_token }}
             <p>
-                Enter search term (e.g. 'rrsH', 'lacZ lacY lacA'):<br/>
+                Enter search term (e.g. 'identifiers', 'rrsH', 'lacZ lacY lacA'):<br/>
                 {{ form.q(size=80) }}<br/>
             </p>
             <p><input type="submit" value="Search"></p>
@@ -16,8 +16,9 @@
             {% for doc in results['response']['docs'] %}
                 <p>
                     <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
-                    Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/>
-                    {{ doc.url }}
+                    Type: {{ doc.AT_type }}<br/>
+                    <!-- Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/> -->
+                    <!-- {{ doc.url }} -->
                 </p>
             {% endfor %}
         {% endif %}
