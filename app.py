@@ -28,7 +28,14 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    params = {'q': 'AT_type:DataCatalog'}
+    r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
+    results = json.loads(r.text)
+    sites = set()
+    for result in results['response']['docs']:
+        sites.add(result['url'])
+
+    return render_template('about.html', sites=sites)
 
 
 class SearchForm(FlaskForm):
