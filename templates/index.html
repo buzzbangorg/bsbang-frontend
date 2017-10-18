@@ -30,10 +30,20 @@
                         <td><b>Type</b></td>
                         <td>{{ doc.AT_type }}</td>
                     </tr>
-
-                <!-- Type: <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a><br/> -->
-                <!-- {{ doc.url }} -->
-                    {% if doc.AT_type == 'DataCatalog' %}
+                    {% if doc.AT_type == 'PhysicalEntity' %}
+                        <tr>
+                            <td><b>Profile</b></td>
+                            <td><a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a></td>
+                        </tr>
+                        <tr>
+                            <td><b>Identifier</b></td>
+                            <td>{{ doc.identifier }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>From</b></td>
+                            <td>{{ doc.url }}</td>
+                        </tr>
+                    {% elif doc.AT_type == 'DataCatalog' %}
                         <tr>
                             <td><b>Keywords</b></td>
                             <td>{{ doc.keywords }}</td>
