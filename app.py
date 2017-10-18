@@ -20,6 +20,21 @@ def index():
         params = {'q': form.q.data, 'defType': 'edismax'}
         r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
         results = json.loads(r.text)
+
+        # FIXME: To eliminate duplicates through crawling artifacts we are going to doctor the results to remove duplicate
+        # URLs.  THIS IS NOT A PERMANENT SOLUTION, esp. as we are storing the url reported by the JSON-LD.  Really,
+        # we need to store the URL we actually crawl and then make sure it matches the reported URL, etc.
+        seen_urls = set()
+        doctored_docs = []
+        for doc in results['response']['docs']:
+            if doc['url'] in seen_urls:
+                continue
+
+            seen_urls.add(doc['url'])
+            doctored_docs.append(doc)
+
+        results['response']['docs'] = doctored_docs
+        results['response']['numFound'] = len(doctored_docs)
     else:
         results = None
 
