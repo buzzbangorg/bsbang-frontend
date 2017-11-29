@@ -53,6 +53,12 @@
                             <td>{{ doc.description }}</td>
                         </tr>
                     {% endif %}
+                    {% if 'alternateName' in doc %}
+                        <tr>
+                            <td><b>alternateName</b></td>
+                            <td>{{ doc.alternateName }}</td>
+                        </tr>
+                    {% endif %}
                 </table>
             </p>
         {% endfor %}
