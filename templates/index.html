@@ -33,7 +33,13 @@
                     {% if doc.AT_type == 'PhysicalEntity' %}
                         <tr>
                             <td><b>Profile</b></td>
-                            <td><a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a></td>
+                            <td>
+                                {% if doc.additionalType.startswith('http://') %}
+                                    <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a>
+                                {% else %}
+                                    {{ doc.additionalType }}
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
                             <td><b>Identifier</b></td>
