@@ -10,6 +10,9 @@ URLs, either webpages or sitemap.xml.
 The main site running this frontend is at http://buzzbang.science
 
 ## Install ##
+
+These instructions are for Linux.  No plans to support Windows at this time.
+
 1. Copy bsbang.cfg.example to bsbang.cfg and change SECRET_KEY to your secret key and point SOLR_URL to your Solr install
 2. Execute python3 app.py
 
