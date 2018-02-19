@@ -25,12 +25,13 @@ To install in Apache2
 ## TODO ##
 Future plans include:
 
-* Make crawler periodically re-crawl.
-* Understand much more structure (e.g. DataSet elements within DataCatalog).
-* Parse other Bioschemas and schema.org types used by life sciences websites (e.g. Organization, Service, Product)
-* Allow users to register URLs for crawling via the website.
-* Add mongodb for capturing crawled JSON-LD (currently I only have Solr but need something else as a general docstore).
-* Crawl and understand PhysicalEntity/BioChemEntity/ResearchEntity once this matures further.
+* Greatly improve the basic look for the website (logo and style)
+* When displaying results, do boxout information that is useful to the user, in a similiar style to Google info-boxes
+ (e.g. how many datasets a data catalog has, the information on the hosting biobank for a particular found biological sample.
+ This will require significant improvements to the scope of the corresponding crawler and how it stores crawled
+ structured data.
+* Allow users to register URLs for crawling via the website. To do this, the crawler will also need filtering and 
+limiting control to prevent crashes from malicious, malformed or simply huge crawl targets.
 
 Any other suggestions welcome as Github issues for discussion or as pull requests.
 
