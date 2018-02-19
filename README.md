@@ -13,7 +13,8 @@ The main site running this frontend is at http://buzzbang.science
 
 These instructions are for Linux.  No plans to support Windows at this time.
 
-1. Copy bsbang.cfg.example to bsbang.cfg and change SECRET_KEY to your secret key and point SOLR_URL to your Solr install
+1. Copy bsbang.cfg.example to bsbang.cfg and change SECRET_KEY to your 
+(Flask secret key)[http://flask.pocoo.org/docs/0.12/quickstart/#sessions] and point SOLR_URL to your Solr install
 2. Execute python3 app.py
 
 To install in Apache2
