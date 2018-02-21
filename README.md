@@ -37,10 +37,12 @@ Future plans include:
 * Allow users to register URLs for crawling via the website. To do this, the crawler will also need filtering and 
 limiting control to prevent crashes from malicious, malformed or simply huge crawl targets.
 
-Any other suggestions welcome as Github issues for discussion or as pull requests.
 
-## Contact ##
-Brought to you by the Micklem Lab at Cambridge University in the UK (http://www.micklemlab.org/), with funding from the
-BBSRC (http://www.bbsrc.ac.uk/)
+## Hacking ##
 
-Comments/suggestions please send to justincc AT intermine.org or tweet me (@justincc).
+Contributions welcome!  Please
+
+* Conform to the PEP 8 style guide.
+
+Thanks!
+
