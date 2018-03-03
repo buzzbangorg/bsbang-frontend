@@ -1,73 +1,119 @@
 <html>
+
 <head>
     <title>Buzzbang</title>
     <style>
-        .results-table { border:'0' }
+        .results-table {
+            border: '0'
+        }
+
         .results-table td {
             padding-right: 7.5px;
-            vertical-align:top
+            vertical-align: top
+        }
+
+        .clearfix {
+            margin-top: 60px;
+        }
+
+        .search {
+            font-size: 24px;
+        }
+        thead{
+            padding-left:80px;
         }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
 </head>
+
 <body>
-    <h1>Buzzbang Search</h1>
-    <p><a href="about">About</a></p>
-    <form action="" method="post" name="search">
-        {{ form.csrf_token }}
-        <p>
-            Enter search term (e.g. 'data', 'registry', 'rrsH', 'lacZ lacY lacA'):<br/>
-            {{ form.q(size=80) }}<br/>
-        </p>
-        <p><input type="submit" value="Search"></p>
-    </form>
-    {% if results %}
-        <p>{{ results['response']['numFound'] }} result(s)</p>
+    <!-- <h1>Buzzbang Search</h1> -->
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <span class="navbar-brand mb-0 h1">Buzzbang Search</span>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">About</button>
+    </nav>
+    <!-- <p><a href="about">About</a></p> -->
+    <div class="container text-center">
+        <div class="clearfix"></div>
+        <form action="" method="post" name="search">
+            {{ form.csrf_token }}
+            <p class="font-weight-bold search"> Enter search term (e.g. 'data', 'registry', 'rrsH', 'lacZ lacY lacA'):</p>
+            <p>{{ form.q(size=80) }}</p>
+            <!-- <p><input type="submit" value="Search"></p> -->
+            <button type="submit" class="btn btn-outline-dark"> Search </button>
+        </form>
+        {% if results %}
+        <!-- <p>{{ results['response']['numFound'] }} result(s)</p> -->
+        <div class="alert alert-success" role="alert">
+            <p>{{ results['response']['numFound'] }} result(s)</p>
+        </div>
         {% for doc in results['response']['docs'] %}
-            <p>
-                <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
-                <table class='results-table'>
-                    <tr>
-                        <td><b>Type</b></td>
-                        <td>{{ doc.AT_type }}</td>
-                    </tr>
-                    {% if doc.AT_type == 'PhysicalEntity' %}
-                        <tr>
-                            <td><b>Profile</b></td>
-                            <td>
-                                {% if doc.additionalType.startswith('http://') %}
-                                    <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a>
-                                {% else %}
-                                    {{ doc.additionalType }}
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Identifier</b></td>
-                            <td>{{ doc.identifier }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>From</b></td>
-                            <td><a href="{{ doc.url }}">{{ doc.url }}</a></td>
-                        </tr>
-                    {% elif doc.AT_type == 'DataCatalog' %}
-                        <tr>
-                            <td><b>Keywords</b></td>
-                            <td>{{ doc.keywords }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Description</b></td>
-                            <td>{{ doc.description }}</td>
-                        </tr>
-                    {% endif %}
-                    {% if 'alternateName' in doc %}
-                        <tr>
-                            <td><b>alternateName</b></td>
-                            <td>{{ doc.alternateName }}</td>
-                        </tr>
-                    {% endif %}
-                </table>
-            </p>
-        {% endfor %}
-    {% endif %}
+        <p>
+            <!-- <a href="{{ doc.url }}">{{ doc.name }}</a> -->
+           
+            <table class='results-table  text-center table'>
+                    <thead class="thead-light">
+                            <tr>
+                                <th> <a href="{{ doc.url }}">{{ doc.name }}</a></th>
+                            </tr>
+                        </thead>
+                <tr>
+                    <td>
+                        <b>Type</b>
+                    </td>
+                    <td>{{ doc.AT_type }}</td>
+                </tr>
+                {% if doc.AT_type == 'PhysicalEntity' %}
+                <tr>
+                    <td>
+                        <b>Profile</b>
+                    </td>
+                    <td>
+                        {% if doc.additionalType.startswith('http://') %}
+                        <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a>
+                        {% else %} {{ doc.additionalType }} {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Identifier</b>
+                    </td>
+                    <td>{{ doc.identifier }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>From</b>
+                    </td>
+                    <td>
+                        <a href="{{ doc.url }}">{{ doc.url }}</a>
+                    </td>
+                </tr>
+                {% elif doc.AT_type == 'DataCatalog' %}
+                <tr>
+                    <td>
+                        <b>Keywords</b>
+                    </td>
+                    <td>{{ doc.keywords }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Description</b>
+                    </td>
+                    <td>{{ doc.description }}</td>
+                </tr>
+                {% endif %} {% if 'alternateName' in doc %}
+                <tr>
+                    <td>
+                        <b>alternateName</b>
+                    </td>
+                    <td>{{ doc.alternateName }}</td>
+                </tr>
+                {% endif %}
+            </table>
+        </p>
+        {% endfor %} {% endif %}
+    </div>
 </body>
+
 </html>
