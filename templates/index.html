@@ -2,6 +2,12 @@
 <head>
     <title>Buzzbang</title>
     <style>
+        .logo {
+            display: block;
+            margin-top: 60px;
+            margin-left: auto;
+            margin-right: auto;
+         }
         .text-centered { text-align: center }
         .results-table { border:'0' }
         .results-table td {
@@ -11,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1 class="text-centered">Buzzbang Search</h1>
+    <img class="logo" src="/static/images/logo.png"></img>
     <p class="text-centered"><a href="about">About</a></p>
     <form action="" method="post" name="search">
         {{ form.csrf_token }}
