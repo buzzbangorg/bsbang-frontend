@@ -2,6 +2,7 @@
 <head>
     <title>Buzzbang</title>
     <style>
+        .text-centered { text-align: center }
         .results-table { border:'0' }
         .results-table td {
             padding-right: 7.5px;
@@ -10,15 +11,15 @@
     </style>
 </head>
 <body>
-    <h1>Buzzbang Search</h1>
-    <p><a href="about">About</a></p>
+    <h1 class="text-centered">Buzzbang Search</h1>
+    <p class="text-centered"><a href="about">About</a></p>
     <form action="" method="post" name="search">
         {{ form.csrf_token }}
-        <p>
+        <p class="text-centered">
             Enter search term (e.g. 'data', 'registry', 'rrsH', 'lacZ lacY lacA'):<br/>
             {{ form.q(size=80) }}<br/>
         </p>
-        <p><input type="submit" value="Search"></p>
+        <p class="text-centered"><input type="submit" value="Search"></p>
     </form>
     {% if results %}
         <p>{{ results['response']['numFound'] }} result(s)</p>
