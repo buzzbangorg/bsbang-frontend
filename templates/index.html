@@ -8,6 +8,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .tabs { text-align: right }
         .text-centered { text-align: center }
         .results-table { border:'0' }
         .results-table td {
@@ -17,7 +18,7 @@
     </style>
 </head>
 <body>
-    <p><a href="about">About</a></p>
+    <p class="tabs"><a href="about">About</a></p>
     <a href="/"><img class="logo" src="/static/images/logo.png"/></a>
     <form action="" method="post" name="search">
         {{ form.csrf_token }}
