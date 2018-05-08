@@ -2,7 +2,7 @@
 
 ## About ##
 
-This is the frontend to the extremely alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup.  For more information about Bioschemas and Buzzbang, please see the [Buzzbang crawler wiki frontpage](https://github.com/justinccdev/bsbang-crawler/wiki).
+This is the frontend to the extremely alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup.  For more information about Bioschemas and Buzzbang, please see the [Buzzbang crawler wiki](https://github.com/justinccdev/bsbang-crawler/wiki).
 
 It currently only crawls DataCatalog and PhysicalEntity (soon to be renamed to BioChemEntity) JSON-LD found at pre-registered
 URLs, either webpages or sitemap.xml. 
