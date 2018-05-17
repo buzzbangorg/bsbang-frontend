@@ -2,7 +2,7 @@
 
 ## About ##
 
-This is the frontend to the extremely alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup.  For more information about Bioschemas and Buzzbang, please see the [Buzzbang crawler wiki](https://github.com/justinccdev/bsbang-crawler/wiki).
+This is the frontend to the extremely alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup. Please see https://github.com/buzzbangorg/buzzbang-doc/wiki for more information.
 
 The main site running this frontend is at http://buzzbang.science
 
