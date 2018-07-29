@@ -24,13 +24,8 @@ def index():
         # FIXME: To eliminate duplicates through crawling artifacts we are going to doctor the results to remove duplicate
         # URLs.  THIS IS NOT A PERMANENT SOLUTION, esp. as we are storing the url reported by the JSON-LD.  Really,
         # we need to store the URL we actually crawl and then make sure it matches the reported URL, etc.
-        seen_urls = set()
         doctored_docs = []
         for doc in results['response']['docs']:
-            if doc['url'] in seen_urls:
-                continue
-
-            seen_urls.add(doc['url'])
             doctored_docs.append(doc)
 
         results['response']['docs'] = doctored_docs
@@ -48,7 +43,7 @@ def about():
     results = json.loads(r.text)
     sites = set()
     for result in results['response']['docs']:
-        sites.add(result['url'])
+        sites.add(result)
 
     # FIXME: Yes I know, not a permanent solution. Biosamples does not have a DataCatalog
     # Probably the eaiest slightly better manual fix is to artificially create one in the Solr index until we have
