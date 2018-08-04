@@ -27,7 +27,7 @@
     <a href="/"><img class="logo" src="/static/images/logo.png"/></a>
     <form action="" method="post" name="search">
         {{ form.csrf_token }}
-        <p class="search-prompt">Enter search term (e.g. 'data', 'registry', 'rrsH', 'lacZ lacY lacA')</p>
+        <p class="search-prompt">Enter search term (e.g. biosamples, beacon etc.)</p>
         <p class="search-box">{{ form.q(size=80) }}</p>
         <p class="search-button"><input type="submit" value="Search"></p>
     </form>
@@ -35,49 +35,12 @@
         <p>{{ results['response']['numFound'] }} result(s)</p>
         {% for doc in results['response']['docs'] %}
             <p>
-                <a href="{{ doc.url }}">{{ doc.name }}</a><br/>
-                <table class='results-table'>
-                    <tr>
-                        <td><b>Type</b></td>
-                        <td>{{ doc.AT_type }}</td>
-                    </tr>
-                    {% if doc.AT_type == 'PhysicalEntity' %}
-                        <tr>
-                            <td><b>Profile</b></td>
-                            <td>
-                                {% if doc.additionalType.startswith('http://') %}
-                                    <a href="{{ doc.additionalType }}">{{ doc.additionalType }}</a>
-                                {% else %}
-                                    {{ doc.additionalType }}
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Identifier</b></td>
-                            <td>{{ doc.identifier }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>From</b></td>
-                            <td><a href="{{ doc.url }}">{{ doc.url }}</a></td>
-                        </tr>
-                    {% elif doc.AT_type == 'DataCatalog' %}
-                        <tr>
-                            <td><b>Keywords</b></td>
-                            <td>{{ doc.keywords }}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Description</b></td>
-                            <td>{{ doc.description }}</td>
-                        </tr>
-                    {% endif %}
-                    {% if 'alternateName' in doc %}
-                        <tr>
-                            <td><b>alternateName</b></td>
-                            <td>{{ doc.alternateName }}</td>
-                        </tr>
-                    {% endif %}
-                </table>
+                {% for key, val in doc.items() %}
+                            <p> {{key}} </p>
+                            <p> {{val}} </p>
             </p>
+                {% endfor %}
+            <hr>
         {% endfor %}
     {% endif %}
 </body>
