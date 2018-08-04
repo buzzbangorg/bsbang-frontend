@@ -30,17 +30,18 @@
                 
                 <div class="col-xs-12 col-sm-12 col-md-5">
                     <ul class="meta-search">
-                        <li><span>{{doc["name"]}}</span></li>
-                        <li><span>{{doc["dateModified"]}}</span></li>
-                        <li><span>{{doc["mainEntity"]}}</span></li>
+                        <li><span>Entity : {{doc["name"][0]}}</span></li>
+                        <li><span>Date Modified : {{doc["dateModified"][0]}}</span></li>
+                        <li><span>Bioschemas Type : {{doc["mainEntity"][0]}}</span></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7">
-                    <h3><a href="{{doc['url']}}" title="">Description</a></h3>
+                    <h4><a href="{{doc['url'][0]}}" title="">Description</a></h3>
                     <p>{{doc["description"]}}</p>
                 </div>
                 <span class="clearfix borda"></span>
-            </article>   
+            </article> 
+            <hr class="hr-success"/>  
         </section>
         {% endfor %}
     </div>
