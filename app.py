@@ -20,7 +20,14 @@ def index():
         params = {'q': form.q.data, 'defType': 'edismax'}
         r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
         results = json.loads(r.text)
-        print(results)
+        # print(results)
+        new_docs = list()
+        for doc in results["response"]["docs"]:
+            new_doc = dict()
+            for key, val in doc.items():
+                new_doc[key.split(".")[-1]] = val
+            new_docs.append(new_doc)
+        results["response"]["docs"] = new_docs
     else:
         results = None
 

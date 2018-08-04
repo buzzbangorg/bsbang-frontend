@@ -1,26 +1,11 @@
 <html>
 <head>
     <title>Buzzbang</title>
-    <style>
-        .logo {
-            display: block;
-            margin-top: 50px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .tabs { text-align: right }
-        .search-prompt {
-            margin-bottom: 2px;
-            text-align: center
-         }
-        .search-box { margin-top: 5px; text-align: center }
-        .search-button { text-align: center }
-        .results-table { border:'0' }
-        .results-table td {
-            padding-right: 7.5px;
-            vertical-align:top
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static',filename="assets/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename="assets/css/custom.css") }}">
+    <script src="{{ url_for('static',filename="assets/js/bootstrap.min.js") }}"></script>
+    <script src="{{ url_for('static',filename="assets/js/jquery-1.11.1.min.js") }}"></script>
+
 </head>
 <body>
     <p class="tabs"><a href="about">About</a></p>
@@ -31,17 +16,34 @@
         <p class="search-box">{{ form.q(size=80) }}</p>
         <p class="search-button"><input type="submit" value="Search"></p>
     </form>
+
     {% if results %}
-        <p>{{ results['response']['numFound'] }} result(s)</p>
+    <div class="container">
+            <hgroup class="mb20">
+            <h1>Search Results</h1>
+            <h2 class="lead"><strong class="text-danger">{{ results['response']['numFound'] }}</strong> results found
+        </hgroup>
+
         {% for doc in results['response']['docs'] %}
-            <p>
-                {% for key, val in doc.items() %}
-                            <p> {{key}} </p>
-                            <p> {{val}} </p>
-            </p>
-                {% endfor %}
-            <hr>
+        <section class="col-xs-12 col-sm-6 col-md-12">
+            <article class="search-result row">
+                
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <ul class="meta-search">
+                        <li><span>{{doc["name"]}}</span></li>
+                        <li><span>{{doc["dateModified"]}}</span></li>
+                        <li><span>{{doc["mainEntity"]}}</span></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <h3><a href="{{doc['url']}}" title="">Description</a></h3>
+                    <p>{{doc["description"]}}</p>
+                </div>
+                <span class="clearfix borda"></span>
+            </article>   
+        </section>
         {% endfor %}
+    </div>
     {% endif %}
 </body>
 </html>
