@@ -1,38 +1,44 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template
-from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired
 import json
 import requests
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from flask import Flask, render_template
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config.from_pyfile('bsbang.cfg.example')
 app.config['SOLR_SELECT_URL'] = app.config['SOLR_URL'] + '/select'
 
 
+def get_items(form, start=0, rows=10):
+    params = {'q': form.q.data, 'defType': 'edismax', 'start' : str(start), 'rows' : str(rows)}
+    r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
+    results = json.loads(r.text)
+    return results
+
+def revamped_response(old_response):
+    new_docs = list()
+    for doc in old_response["response"]["docs"]:
+        new_doc = dict()
+        for key, val in doc.items():
+            new_doc[key.split(".")[-1]] = val
+        new_docs.append(new_doc)
+    return new_docs
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = SearchForm()
     if form.validate():
-        # flash('Query for [%s]' % form.q.data)
-        params = {'q': form.q.data, 'defType': 'edismax'}
-        r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
-        results = json.loads(r.text)
-        # print(results)
-        new_docs = list()
-        for doc in results["response"]["docs"]:
-            new_doc = dict()
-            for key, val in doc.items():
-                new_doc[key.split(".")[-1]] = val
-            new_docs.append(new_doc)
-        results["response"]["docs"] = new_docs
+        results = get_items(form)
+        results["response"]["docs"] = revamped_response(results)
+        total_items = results["response"]["numFound"]
     else:
         results = None
+        total_items = 0
 
-    return render_template('index.html', form=form, results=results)
-
+    return render_template('index.html', form=form, results=results, n_items=total_items)
 
 @app.route('/about')
 def about():
