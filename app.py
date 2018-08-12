@@ -61,7 +61,6 @@ def prev_results(query, start):
     total_items = results["response"]["numFound"]
     return render_template('results.html', results=results, n_items=total_items, itemno=no)
 
-
 @app.route('/about')
 def about():
     params = {'q': 'AT_type:DataCatalog'}

@@ -15,21 +15,23 @@
         <div class="col-xs-12 col-sm-12 col-md-8">
             <hgroup class="mb20">
                 <h1>Search Results</h1>
-                <h2 class="lead"><strong class="text-danger"> {{itemno}} - {{itemno+results['response']['docs']|length-1}} </strong>  of <strong class="text-danger"> {{ results['response']['numFound'] }}</strong> results found
+                <h2 class="lead"><strong class="text-danger"> {{itemno+1}} - {{itemno+results['response']['docs']|length}} </strong>  of <strong class="text-danger"> {{ results['response']['numFound'] }}</strong> results found
             </hgroup>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            
-            <a href="{{ url_for('prev_results', query=results['responseHeader']['params']['q'], start=results['response']['start'])}}">Previous</a>
-
-            <a href="{{ url_for('next_results', query= results['responseHeader']['params']['q'],start=results['response']['start'])}}">Next</a>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="{{ url_for('prev_results', query=results['responseHeader']['params']['q'], start=results['response']['start'])}}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="{{ url_for('next_results', query= results['responseHeader']['params']['q'],start=results['response']['start'])}}">Next</a></li>
+              </ul>
+            </nav>
             
         </div>
         
         {% for doc in results['response']['docs'] %}
         <section class="col-xs-12 col-sm-6 col-md-12">
+            Source Link: <span><a href="{{doc['url'][0]}}">{{doc['url'][0]}}</a></span>
             <article class="search-result row">
-                
                 <div class="col-xs-12 col-sm-12 col-md-5">
                     <ul class="meta-search">
                         <li><span>Entity : {{doc["name"][0]}}</span></li>
@@ -46,6 +48,12 @@
             <hr class="hr-success"/>  
         </section>
         {% endfor %}
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{{ url_for('prev_results', query=results['responseHeader']['params']['q'], start=results['response']['start'])}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for('next_results', query= results['responseHeader']['params']['q'],start=results['response']['start'])}}">Next</a></li>
+          </ul>
+        </nav>
     </div>
     {% endif %}
 </body>
