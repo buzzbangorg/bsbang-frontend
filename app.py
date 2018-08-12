@@ -4,7 +4,7 @@ import json
 import requests
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
@@ -12,8 +12,8 @@ app.config.from_pyfile('bsbang.cfg.example')
 app.config['SOLR_SELECT_URL'] = app.config['SOLR_URL'] + '/select'
 
 
-def get_items(form, start=0, rows=10):
-    params = {'q': form.q.data, 'defType': 'edismax', 'start' : str(start), 'rows' : str(rows)}
+def get_items(data, start=0, rows=10):
+    params = {'q': data, 'defType': 'edismax', 'start' : str(start), 'rows' : str(rows)}
     r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
     results = json.loads(r.text)
     return results
@@ -31,14 +31,23 @@ def revamped_response(old_response):
 def index():
     form = SearchForm()
     if form.validate():
-        results = get_items(form)
+        results = get_items(form.q.data)
         results["response"]["docs"] = revamped_response(results)
         total_items = results["response"]["numFound"]
+        return render_template('results.html', results=results, n_items=total_items)
     else:
         results = None
         total_items = 0
+        return render_template('index.html', form=form)
 
-    return render_template('index.html', form=form, results=results, n_items=total_items)
+@app.route('/results.start=<start>', methods=['GET', 'POST'])
+def results(start):
+    results = get_items("cancer", start=(int(start)+10))
+    results["response"]["docs"] = revamped_response(results)
+    total_items = results["response"]["numFound"]
+    return render_template('results.html', results=results, n_items=total_items)
+
+
 
 @app.route('/about')
 def about():
