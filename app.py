@@ -40,17 +40,26 @@ def index():
 
 @app.route('/next_results&query=<query>&start=<start>', methods=['GET', 'POST'])
 def next_results(query, start):
-    results = get_items(query, startarg=(int(start)+int(10)))
+    no = int(start)+int(10)
+    results = get_items(query, startarg=no)
+    if(len(results["response"]["docs"])==0):
+        no = int(start)
+        results = get_items(query, startarg=no)
     results["response"]["docs"] = revamped_response(results)
     total_items = results["response"]["numFound"]
-    return render_template('results.html', results=results, n_items=total_items, itemno=(int(start)+10))
+    return render_template('results.html', results=results, n_items=total_items, itemno=no)
 
 @app.route('/prev_results&query=<query>&start=<start>', methods=['GET', 'POST'])
 def prev_results(query, start):
-    results = get_items(query, startarg=(int(start)-int(10)))
+    if(int(start)==0):
+        no = int(start)
+        results = get_items(query, startarg=no)
+    else:
+        no = int(start)-int(10)
+        results = get_items(query, startarg=no)
     results["response"]["docs"] = revamped_response(results)
     total_items = results["response"]["numFound"]
-    return render_template('results.html', results=results, n_items=total_items, itemno=(int(start)-int(10)))
+    return render_template('results.html', results=results, n_items=total_items, itemno=no)
 
 
 @app.route('/about')

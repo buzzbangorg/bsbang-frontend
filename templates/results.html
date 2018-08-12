@@ -15,7 +15,7 @@
         <div class="col-xs-12 col-sm-12 col-md-8">
             <hgroup class="mb20">
                 <h1>Search Results</h1>
-                <h2 class="lead"><strong class="text-danger"> {{itemno}} of {{ results['response']['numFound'] }}</strong> results found
+                <h2 class="lead"><strong class="text-danger"> {{itemno}} - {{itemno+results['response']['docs']|length-1}} </strong>  of <strong class="text-danger"> {{ results['response']['numFound'] }}</strong> results found
             </hgroup>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
