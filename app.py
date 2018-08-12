@@ -12,8 +12,8 @@ app.config.from_pyfile('bsbang.cfg.example')
 app.config['SOLR_SELECT_URL'] = app.config['SOLR_URL'] + '/select'
 
 
-def get_items(data, start=0, rows=10):
-    params = {'q': data, 'defType': 'edismax', 'start' : str(start), 'rows' : str(rows)}
+def get_items(data, startarg, rows=10):
+    params = {'q': data, 'defType': 'edismax', 'start' : startarg, 'rows' : rows}
     r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
     results = json.loads(r.text)
     return results
@@ -31,22 +31,26 @@ def revamped_response(old_response):
 def index():
     form = SearchForm()
     if form.validate():
-        results = get_items(form.q.data)
+        results = get_items(form.q.data, startarg=0)
         results["response"]["docs"] = revamped_response(results)
         total_items = results["response"]["numFound"]
-        return render_template('results.html', results=results, n_items=total_items)
+        return render_template('results.html', results=results, n_items=total_items, itemno=0)
     else:
-        results = None
-        total_items = 0
         return render_template('index.html', form=form)
 
-@app.route('/results.start=<start>', methods=['GET', 'POST'])
-def results(start):
-    results = get_items("cancer", start=(int(start)+10))
+@app.route('/next_results&query=<query>&start=<start>', methods=['GET', 'POST'])
+def next_results(query, start):
+    results = get_items(query, startarg=(int(start)+int(10)))
     results["response"]["docs"] = revamped_response(results)
     total_items = results["response"]["numFound"]
-    return render_template('results.html', results=results, n_items=total_items)
+    return render_template('results.html', results=results, n_items=total_items, itemno=(int(start)+10))
 
+@app.route('/prev_results&query=<query>&start=<start>', methods=['GET', 'POST'])
+def prev_results(query, start):
+    results = get_items(query, startarg=(int(start)-int(10)))
+    results["response"]["docs"] = revamped_response(results)
+    total_items = results["response"]["numFound"]
+    return render_template('results.html', results=results, n_items=total_items, itemno=(int(start)-int(10)))
 
 
 @app.route('/about')

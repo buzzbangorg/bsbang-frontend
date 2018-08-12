@@ -10,23 +10,22 @@
 <body>
     <p class="tabs"><a href="about">About</a></p>
     <a href="/"><img class="logo" src="/static/images/logo.png"/></a>
-    ss
     {% if results %}
     <div class="container">
         <div class="col-xs-12 col-sm-12 col-md-8">
             <hgroup class="mb20">
                 <h1>Search Results</h1>
-                <h2 class="lead"><strong class="text-danger">{{ results['response']['numFound'] }}</strong> results found
+                <h2 class="lead"><strong class="text-danger"> {{itemno}} of {{ results['response']['numFound'] }}</strong> results found
             </hgroup>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            <a href="#">Previous</a>
-            <a href="{{ url_for('results', start=results['responseHeader']['params']['start'])}}">Next</a>
+            
+            <a href="{{ url_for('prev_results', query=results['responseHeader']['params']['q'], start=results['response']['start'])}}">Previous</a>
+
+            <a href="{{ url_for('next_results', query= results['responseHeader']['params']['q'],start=results['response']['start'])}}">Next</a>
             
         </div>
         
-
-
         {% for doc in results['response']['docs'] %}
         <section class="col-xs-12 col-sm-6 col-md-12">
             <article class="search-result row">
