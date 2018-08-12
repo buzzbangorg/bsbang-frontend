@@ -16,5 +16,28 @@
         <p class="search-box">{{ form.q(size=80) }}</p>
         <p class="search-button"><input type="submit" value="Search"></p>
     </form>
+
+
+
+    {% if results %}
+    <div class="container">
+        <div class="col-xs-12 col-sm-12 col-md-8">
+            <hgroup class="mb20">
+                <h1>Check spelling</h1>
+                <h2 class="lead"><strong class="text-danger"> <strong class="text-danger"> {{ results["numFound"] }}</strong> possible corrections found
+            </hgroup>
+        </div>
+        
+        
+        {% for word in results["suggestion"] %}
+        <section class="col-xs-12 col-sm-6 col-md-12">
+                <span> <a href="{{ url_for('prev_results', query=word['word'], start=0)}}">{{word['word']}}</span>
+        </section>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+
 </body>
 </html>
