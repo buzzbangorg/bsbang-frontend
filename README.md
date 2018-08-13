@@ -2,9 +2,10 @@
 
 ## About ##
 
-This is the frontend to the extremely alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup. Please see https://github.com/buzzbangorg/buzzbang-doc/wiki for more information.
+This is the frontend to the alpha Buzzbang project indexing [Bioschemas](http://bioschemas.org) markup. Please see https://github.com/buzzbangorg/buzzbang-doc/wiki for more information.
 
 The main site running this frontend is at http://buzzbang.science
+The recent developments have not been pushed to the domain yet. pleasefollwo the instructions to install and run the latest version in your local machine.
 
 ## Install ##
 
@@ -23,23 +24,23 @@ Or to run in Apache2:
 4. Copy `install/apache2/bsbang.wsgi` to `/var/www/bsbang`, editing `sys.path.insert()` to point to the root of your
 bsbang installation.
 
-## TODO ##
-Future plans include:
+## MindMap ##
 
-* Greatly improve the basic look for the website (logo and style)
-* When displaying results, do boxout information that is useful to the user, in a similiar style to Google info-boxes
- (e.g. how many datasets a data catalog has, the information on the hosting biobank for a particular found biological sample.
- This will require significant improvements to the scope of the corresponding crawler and how it stores crawled
+- [x] Load 10 results at a time and leave to remaining for further requests
+- [x] Include previous and next button on the result page/Pagination
+- [x] Integrate the spell-check module
+- [ ] Update the aboutme page of the website
+- [ ] Implement the suggester module to provide suggestion as you type
+- [ ] Show 2 page numbers before and after the current page in the page navgation bar
+- [ ] When displaying results, do boxout information that is useful to the user, in a similiar style to Google info-boxes(e.g. how many datasets a data catalog has, the information on the hosting biobank for a particular found biological sample.  This will require significant improvements to the scope of the corresponding crawler and how it stores crawled
  structured data.
-* Allow users to register URLs for crawling via the website. To do this, the crawler will also need filtering and 
-limiting control to prevent crashes from malicious, malformed or simply huge crawl targets.
+- [ ] Allow users to register URLs for crawling via the website. To do this, the crawler will also need filtering and limiting control to prevent crashes from malicious, malformed or simply huge crawl targets.
 
 
-## Hacking ##
+## contributing ##
 
 Contributions welcome!  Please
 
 * Conform to the PEP 8 style guide.
 
 Thanks!
-
