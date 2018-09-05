@@ -81,20 +81,7 @@ def prev_results(query, start):
 
 @app.route('/about')
 def about():
-    params = {'q': 'AT_type:DataCatalog'}
-    r = requests.post(app.config['SOLR_SELECT_URL'], data=params)
-    results = json.loads(r.text)
-    sites = set()
-    for result in results['response']['docs']:
-        sites.add(result)
-
-    # FIXME: Yes I know, not a permanent solution. Biosamples does not have a DataCatalog
-    # Probably the eaiest slightly better manual fix is to artificially create one in the Solr index until we have
-    # a parallel database for non-solr info
-    # justincc 2018-02-14 disable again, we ain't crawling biosamples atm
-    # sites.add('https://www.ebi.ac.uk/biosamples')
-
-    return render_template('about.html', sites=sites)
+    return render_template('about.html')
 
 
 class SearchForm(FlaskForm):

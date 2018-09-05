@@ -1,33 +1,162 @@
-<html>
-<head>
-    <title>Buzzbang - about</title>
-    <style>
-        li { margin: 2px 0; }
-    </style>
-</head>
-<body>
-    <h1>Buzzbang - about</h1>
-    <!-- If anybody else wants to use this code we can replace/templatize/move this stuff -->
-    <p>
-        <ul>
-            <li>Extremely alpha prototype search using <a href="http://bioschemas.org">Bioschemas</a> structured data.</li>
-            <li>Currently only manually indexes DataCatalog and PhysicalEntity from the following URLs
-                <ul>
-                    {% for site in sites %}
-                        <li><a href='{{ site }}'>{{ site }}</a></li>
-                    {% endfor %}
-                </ul>
-            Ability to register new URLs coming soon. In the meantime, please message me if you want something added (or submit a pull request).</li>
-            <li>Please go to the <a href="https://github.com/buzzbangorg/buzzbang-doc/wiki">Buzzbang wiki</a> for more information about Buzzbang
-            or the <a href="https://github.com/buzzbangorg/bsbang-frontend">bsbang-frontend repository</a>. Patches and bug reports welcome.</li>
-            <li>Otherwise, please send suggestions/comments to Justin Clark-Casey (justincc AT intermine.org) or <a href="https://twitter.com/justincc">tweet me</a>.</li>
-            <li>Brought to you by the <a href="http://www.micklemlab.org/">Micklem Lab</a>, funded by the <a href='http://www.bbsrc.ac.uk/'>BBSRC</a>.</li>
-            <li>Many thanks to <a href="https://github.com/ggcarlosr">Carlos Garcia</a> for the Buzzbang logo, available
-                under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons CC BY 4.0</a>.
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Buzzbang</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename="assets/vendor/bootstrap/css/bootstrap.min.css") }}">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Neue-Helvetica:  500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arial" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename="assets/vendor/fontawesome-free/css/all.min.css") }}">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ url_for('static',filename="assets/css/buzzbang.css") }}">
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Buzzbang</span>
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/static/images/profile.jpg" alt="">
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#motivation">Motivation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#state">State of play</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#architecture">Architecture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#developers">For developers</a>
+          </li>
         </ul>
-    </p>
-    <p>
-        <a href='/'>Back</a>
-    </p>
-</body>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+
+      <section class="buzzbang-section p-3 p-lg-5 d-flex d-column" id="about">
+        <div class="my-auto">
+          <h1 class="mb-0">
+            <span class="text-primary">Buzzbang</span>
+          </h1>
+          <div class="subheading mb-5"> Google-like search engine for biological data
+            <br> <a href="http://intermine.org/">InterMine</a>
+          </div>
+          <p class="lead mb-5">Buzzbang is a Google-like bio data search engine for Life Sciences data marked up with bioschemas.org mark-up. The data from different sources following this mark-up is collected and indexed in a search tool which can be accessed via a search interface. The project is in its early stages since the bioschemas.org markup is itself evolving and the markup is not yet followed by a lot of bio-data banks. We encourage the web masters publishing the data to follow this markup to reach a bigger audience. The users of these data — research labs, universities and organisations — can use this tool, Buzzbang to aid access to these data.</p>
+         
+        </div>
+      </section>
+
+      <hr class="m-0">
+
+      <section class="buzzbang-section p-3 p-lg-5 d-flex flex-column" id="motivation">
+        <div class="my-auto">
+          <h2 class="mb-5">Motivation</h2>
+
+          <div class="buzzbang-item d-flex flex-column flex-md-row mb-5">
+            <div class="buzzbang-content mr-auto">
+              <div class="subheading mb-3">Why InterMine took this initiative?</div>
+                <p class="mb-3">
+                InterMine is an open source data warehouse system. InterMine is used to create databases of biological data accessed by sophisticated web query tools. It can be used to create databases from a single data set or can integrate multiple sources of data. InterMine includes a user-friendly web interface that works ‘out of the box’ and can be easily customized(Wikipedia). InterMine took the initiative to provide an interface to search the bioscemas.org marked up data on the Internet as an independent project — Buzzbang.</p>
+                <p class="mb-0">
+                  InterMine will eventually embed Bioschemas but we finally has to demonstrate cross-site findability. Hence, we are working on a prototype crawler and search frontend for data marked with Bioschemas. It has been given a Google-like UI to keep it minimalistic for the users. We are still exploring and developing. Theproject s in initial stages and as the Bioschemas becomes more popular among the webmasters and data banks, this tool may become a necessity for the end users.           
+                </p>
+            </div>
+          </div>
+          </div>
+
+      </section>
+
+      <hr class="m-0">
+
+      <section class="buzzbang-section p-3 p-lg-5 d-flex flex-column" id="state">
+        <div class="my-auto">
+          <h2 class="mb-5">State of play</h2>
+
+          <div class="buzzbang-item d-flex flex-column flex-md-row mb-5">
+            <div class="buzzbang-content mr-auto">
+              <div class="subheading mb-3">Schema.org ands Bioschemas.org</div>
+              <p class="mb-3">
+                schema.org is a community project to develop a set of schemas that can be embedded in webpages, in formats such as JSON-LD, RDFa and Microdata. Example schemas include Movie, Store and Product. Among other usecases, this embedded data can then be crawled by search engines such as Google and Yandex, and used to return useful structured results on queries (such as the information boxes you see on some Google search results).
+              </p>
+              <p class="mb-3">
+                Bioschemas is a community project by the life sciences community to specify how schemas from schema.org can be used to markup life sciences information. As such, it has 2 aspects:
+                <ol>
+                  <li>
+                    When using existing schema.org schemas, such as DataCatalog and Dataset, Bioschemas will specify which properties are mandatory, which optional and the cardinality of properties. This is because schema.org itself specifies none of these things.
+                  </li>
+                  <li>
+                      In some cases, Bioschemas will come up with new schemas, such as BioChemEntity to describe biological and chemical entities, where nothing suitable pre-exists in schema.org. Once these have gone through review by the Bioschemas community, they will also be suggested to the main schema.org community.
+                  </li>
+                </ol>
+              </p>
+              <p class="mb-3">
+                Bioschemas is an extremely young project. As such, the specifications are subject to considerable change and some are not final (in particular BioChemEntity). In addition, very few life sciences information sources have yet implemented this markup. Nonetheless, Buzzbang is an alpha project to start crawling this data so that it can then be searched, and later on possibly joined together using embedded ontology terms in the form of a knowledge graph.
+              </p>
+              <p class="mb-0">
+                As an alpha project, Buzzbang is itself subject to considerable change.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="m-0">
+
+      <section class="buzzbang-section p-3 p-lg-5 d-flex flex-column" id="architecture">
+        <div class="my-auto">
+          <h2 class="mb-5">Architecture</h2>
+            <img class="img-fluid img-profile mx-auto mb-2" src = "/static/images/overall-buzzbang-architecture.jpeg">
+        </div>
+      </section>
+
+      <hr class="m-0">
+
+      <section class="buzzbang-section p-3 p-lg-5 d-flex flex-column" id="developers">
+        <div class="my-auto">
+          <h2 class="mb-5">For Developers</h2>
+          <p class="mb-5">
+            This is the first stable version of Buzzbang that has been released.  Presently, we have indexed only <a href="https://www.ebi.ac.uk/biosamples/"> Biosamples </a> published by <a href="www.ebi.ac.uk"> European Bioinformatics Institute (EMBL-EBI) </a>. We are working on to scrape and index more data that have been publised with Bioschemas mark-up. Developers and enthusiasts are welcomed to contribute to this open-source project. For further details please visit our Github repository.  
+          </p>
+          <div class="social-icons">
+            <a href="https://github.com/buzzbangorg">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static',filename="assets/vendor/jquery/jquery.min.js") }}"></script>
+    <script src="{{ url_for('static',filename="assets/vendor/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="{{ url_for('static',filename="assets/vendor/jquery-easing/jquery.easing.min.js") }}"></script>
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static',filename="assets/js/buzzbang.js") }}"></script>
+  </body>
+
 </html>
