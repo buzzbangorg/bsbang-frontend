@@ -65,8 +65,13 @@
           <div class="subheading mb-5"> Google-like search engine for biological data
             <br> <a href="http://intermine.org/">InterMine</a>
           </div>
-          <p class="lead mb-5">Buzzbang is a Google-like bio data search engine for Life Sciences data marked up with bioschemas.org mark-up. The data from different sources following this mark-up is collected and indexed in a search tool which can be accessed via a search interface. The project is in its early stages since the bioschemas.org markup is itself evolving and the markup is not yet followed by a lot of bio-data banks. We encourage the web masters publishing the data to follow this markup to reach a bigger audience. The users of these data — research labs, universities and organisations — can use this tool, Buzzbang to aid access to these data.</p>
-         
+          <p class="lead mb-5">
+            Buzzbang is a Google-like bio data search engine for Life Sciences data marked up with bioschemas.org mark-up.
+            The data from different sources following this mark-up is collected and indexed in a search tool which can be accessed via a search interface.
+            The project is in its early stages since the bioschemas.org markup is itself evolving and the markup is not yet followed by a lot of bio-data banks.
+            We encourage the web masters publishing the data to follow this markup to reach a bigger audience.
+            The users of these data — research labs, universities and organisations — can use this tool, Buzzbang to aid access to these data.
+          </p>
         </div>
       </section>
 
@@ -80,9 +85,18 @@
             <div class="buzzbang-content mr-auto">
               <div class="subheading mb-3">Why InterMine took this initiative?</div>
                 <p class="mb-3">
-                InterMine is an open source data warehouse system. InterMine is used to create databases of biological data accessed by sophisticated web query tools. It can be used to create databases from a single data set or can integrate multiple sources of data. InterMine includes a user-friendly web interface that works ‘out of the box’ and can be easily customized(Wikipedia). InterMine took the initiative to provide an interface to search the bioscemas.org marked up data on the Internet as an independent project — Buzzbang.</p>
+                  InterMine is an open source data warehouse system.
+                  InterMine is used to create databases of biological data accessed by sophisticated web query tools.
+                  It can be used to create databases from a single data set or can integrate multiple sources of data.
+                  InterMine includes a user-friendly web interface that works ‘out of the box’ and can be easily customized(Wikipedia).
+                  InterMine took the initiative to provide an interface to search the bioscemas.org marked up data on the Internet as an independent project — Buzzbang.
+                </p>
                 <p class="mb-0">
-                  InterMine will eventually embed Bioschemas but we finally has to demonstrate cross-site findability. Hence, we are working on a prototype crawler and search frontend for data marked with Bioschemas. It has been given a Google-like UI to keep it minimalistic for the users. We are still exploring and developing. Theproject s in initial stages and as the Bioschemas becomes more popular among the webmasters and data banks, this tool may become a necessity for the end users.           
+                  InterMine will eventually embed Bioschemas but we finally has to demonstrate cross-site findability.
+                  Hence, we are working on a prototype crawler and search frontend for data marked with Bioschemas.
+                  It has been given a Google-like UI to keep it minimalistic for the users.
+                  We are still exploring and developing.
+                  Theproject s in initial stages and as the Bioschemas becomes more popular among the webmasters and data banks, this tool may become a necessity for the end users.
                 </p>
             </div>
           </div>
@@ -100,21 +114,27 @@
             <div class="buzzbang-content mr-auto">
               <div class="subheading mb-3">Schema.org ands Bioschemas.org</div>
               <p class="mb-3">
-                schema.org is a community project to develop a set of schemas that can be embedded in webpages, in formats such as JSON-LD, RDFa and Microdata. Example schemas include Movie, Store and Product. Among other usecases, this embedded data can then be crawled by search engines such as Google and Yandex, and used to return useful structured results on queries (such as the information boxes you see on some Google search results).
+                schema.org is a community project to develop a set of schemas that can be embedded in webpages, in formats such as JSON-LD, RDFa and Microdata.
+                Example schemas include Movie, Store and Product.
+                Among other usecases, this embedded data can then be crawled by search engines such as Google and Yandex, and used to return useful structured results on queries (such as the information boxes you see on some Google search results).
               </p>
               <p class="mb-3">
                 Bioschemas is a community project by the life sciences community to specify how schemas from schema.org can be used to markup life sciences information. As such, it has 2 aspects:
                 <ol>
                   <li>
-                    When using existing schema.org schemas, such as DataCatalog and Dataset, Bioschemas will specify which properties are mandatory, which optional and the cardinality of properties. This is because schema.org itself specifies none of these things.
+                    When using existing schema.org schemas, such as DataCatalog and Dataset, Bioschemas will specify which properties are mandatory, which optional and the cardinality of properties.
+                    This is because schema.org itself specifies none of these things.
                   </li>
                   <li>
-                      In some cases, Bioschemas will come up with new schemas, such as BioChemEntity to describe biological and chemical entities, where nothing suitable pre-exists in schema.org. Once these have gone through review by the Bioschemas community, they will also be suggested to the main schema.org community.
+                    In some cases, Bioschemas will come up with new schemas, such as BioChemEntity to describe biological and chemical entities, where nothing suitable pre-exists in schema.org.
+                    Once these have gone through review by the Bioschemas community, they will also be suggested to the main schema.org community.
                   </li>
                 </ol>
               </p>
               <p class="mb-3">
-                Bioschemas is an extremely young project. As such, the specifications are subject to considerable change and some are not final (in particular BioChemEntity). In addition, very few life sciences information sources have yet implemented this markup. Nonetheless, Buzzbang is an alpha project to start crawling this data so that it can then be searched, and later on possibly joined together using embedded ontology terms in the form of a knowledge graph.
+                Bioschemas is an extremely young project. As such, the specifications are subject to considerable change and some are not final (in particular BioChemEntity).
+                In addition, very few life sciences information sources have yet implemented this markup.
+                Nonetheless, Buzzbang is an alpha project to start crawling this data so that it can then be searched, and later on possibly joined together using embedded ontology terms in the form of a knowledge graph.
               </p>
               <p class="mb-0">
                 As an alpha project, Buzzbang is itself subject to considerable change.
@@ -139,7 +159,11 @@
         <div class="my-auto">
           <h2 class="mb-5">For Developers</h2>
           <p class="mb-5">
-            This is the first stable version of Buzzbang that has been released.  Presently, we have indexed only <a href="https://www.ebi.ac.uk/biosamples/"> Biosamples </a> published by <a href="www.ebi.ac.uk"> European Bioinformatics Institute (EMBL-EBI) </a>. We are working on to scrape and index more data that have been publised with Bioschemas mark-up. Developers and enthusiasts are welcomed to contribute to this open-source project. For further details please visit our Github repository.  
+            This is the first stable version of Buzzbang that has been released.
+            Presently, we have indexed only <a href="https://www.ebi.ac.uk/biosamples/"> Biosamples </a> published by <a href="www.ebi.ac.uk"> European Bioinformatics Institute (EMBL-EBI) </a>.
+            We are working on to scrape and index more data that have been publised with Bioschemas mark-up.
+            Developers and enthusiasts are welcomed to contribute to this open-source project.
+            For further details please visit our Github repository.
           </p>
           <div class="social-icons">
             <a href="https://github.com/buzzbangorg">
